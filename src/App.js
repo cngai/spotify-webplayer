@@ -17,11 +17,32 @@ class App extends Component {
       position: 0,
       duration: 0,
     };
+
+    this.playerCheckInterval = null;
   }
 
   handleLogin() {
     if (this.state.token !== "") {
       this.setState({ loggedIn: true });
+
+      //check every second for the player
+      this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
+    }
+  }
+
+  checkForPlayer() {
+    const { token } = this.state;
+
+    if (window.Spotify !== null) {
+      //cancel the interval if player created
+      clearInterval(this.playerCheckInterval);
+
+      this.player = new Window.Spotify.Player({
+        name: "Chris's Spotify Player",
+        getOAuthToken: cb => { cb(token); },
+      });
+
+      this.player.connect();
     }
   }
 
