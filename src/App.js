@@ -68,6 +68,8 @@ class App extends Component {
       this.setState({ deviceID: device_id });
     });
 
+    this.player.on('player_state_changed', state => this.onStateChanged(state));
+
     /*
     // Not Ready
     player.addListener('not_ready', ({ device_id }) => {
@@ -76,6 +78,30 @@ class App extends Component {
 
     // Connect to the player!
     player.connect();*/
+  }
+
+  onStateChanged(state) {
+    if (state !== null) {
+      const {
+        current_track: currentTrack,
+        position,
+        duration,
+      } = state.track_window;
+      const trackName = currentTrack.name;
+      const albumName = currentTrack.album.name;
+      const artistName = currentTrack.artists
+        .map(artist => artist.name)
+        .join(", ");
+      const playing = !state.paused;
+      this.setState({
+        position,
+        duration,
+        trackName,
+        albumName,
+        artistName,
+        playing
+      });
+    }
   }
 
   render() {
