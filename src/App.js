@@ -66,6 +66,7 @@ class App extends Component {
       let { device_id } = data;
       console.log('Ready with Device ID');
       this.setState({ deviceID: device_id });
+      this.transferPlaybackHere();
     });
 
     this.player.on('player_state_changed', state => this.onStateChanged(state));
@@ -114,6 +115,22 @@ class App extends Component {
 
   onNextClick() {
     this.player.nextTrack();
+  }
+
+  //automatically switch device to web app
+  transferPlaybackHere() {
+    const { deviceID, token } = this.state;
+    fetch("https://api.spotify.com/v1/me/player", {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "device_ids": [ deviceID ],
+        "play": true,
+      }),
+    });
   }
 
   render() {
