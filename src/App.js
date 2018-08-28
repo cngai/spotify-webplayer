@@ -19,24 +19,54 @@ class App extends Component {
     };
   }
 
+  handleLogin() {
+    if (this.state.token !== "") {
+      this.setState({ loggedIn: true });
+    }
+  }
+
   render() {
-    const { token } = this.state;
+    const { 
+      token,
+      loggedIn,
+      artistName,
+      trackName,
+      albumName,
+      error,
+      position,
+      duration,
+      playing,
+     } = this.state;
 
     return (
       <div className="App">
         <div className="App-header">
           <h2>Now Playing</h2>
+          <p>Spotify Web Player</p>
         </div>
-        <p className="App-intro">
-          Enter your Spotify access token. Get it from{" "}
-          <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/">
-          here
-          </a>.
-        </p>
-        <p>
-          <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
-          <button>Go</button>
-        </p>
+
+        {error && <p>Error: {error}</p>}
+
+        {loggedIn ?
+          (<div>
+              <p>Artist: {artistName}</p>
+              <p>Track: {trackName}</p>
+              <p>Album: {albumName}</p>
+            </div>)
+          :
+          (<div>
+            <p className="App-intro">
+              Enter your Spotify access token. Get it from{" "}
+              <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/">
+              here
+              </a>.
+            </p>
+            <p>
+              <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
+              <button onClick={() => this.handleLogin()}>Go</button>
+            </p>
+          </div>)
+        }
       </div>
     );
   }
