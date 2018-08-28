@@ -37,13 +37,45 @@ class App extends Component {
       //cancel the interval if player created
       clearInterval(this.playerCheckInterval);
 
-      this.player = new Window.Spotify.Player({
+      this.player = new window.Spotify.Player({
         name: "Chris's Spotify Player",
         getOAuthToken: cb => { cb(token); },
       });
 
+      this.createEventHandlers();
+
       this.player.connect();
     }
+  }
+
+  createEventHandlers() {
+    // Error handling
+    this.player.on('initialization_error', e => { console.error(e); });
+    this.player.on('authentication_error', e => {
+      console.error(e);
+      this.setState({ loggedIn: false});
+    });
+    this.player.on('account_error', e => { console.error(e); });
+    this.player.on('playback_error', e => { console.error(e); });
+
+    // Playback status updates
+    this.player.on('player_state_changed', state => { console.log(state); });
+
+    // Ready
+    this.player.on('ready', data => {
+      let { device_id } = data;
+      console.log('Ready with Device ID');
+      this.setState({ deviceID: device_id });
+    });
+
+    /*
+    // Not Ready
+    player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+    });
+
+    // Connect to the player!
+    player.connect();*/
   }
 
   render() {
