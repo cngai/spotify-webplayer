@@ -40,6 +40,7 @@ class App extends Component {
       this.player = new window.Spotify.Player({
         name: "Chris's Spotify Player",
         getOAuthToken: cb => { cb(token); },
+        volume: 0.5
       });
 
       this.createEventHandlers();
@@ -50,26 +51,26 @@ class App extends Component {
 
   createEventHandlers() {
     // Error handling
-    this.player.on('initialization_error', e => { console.error(e); });
-    this.player.on('authentication_error', e => {
+    this.player.addListener('initialization_error', e => { console.error(e); });
+    this.player.addListener('authentication_error', e => {
       console.error(e);
       this.setState({ loggedIn: false});
     });
-    this.player.on('account_error', e => { console.error(e); });
-    this.player.on('playback_error', e => { console.error(e); });
+    this.player.addListener('account_error', e => { console.error(e); });
+    this.player.addListener('playback_error', e => { console.error(e); });
 
     // Playback status updates
-    this.player.on('player_state_changed', state => { console.log(state); });
+    this.player.addListener('player_state_changed', state => { console.log(state); });
 
     // Ready
-    this.player.on('ready', data => {
+    this.player.addListener('ready', data => {
       let { device_id } = data;
       console.log('Ready with Device ID');
       this.setState({ deviceID: device_id });
       this.transferPlaybackHere();
     });
 
-    this.player.on('player_state_changed', state => this.onStateChanged(state));
+    this.player.addListener('player_state_changed', state => this.onStateChanged(state));
 
     /*
     // Not Ready
@@ -161,9 +162,9 @@ class App extends Component {
               <p>Track: {trackName}</p>
               <p>Album: {albumName}</p>
               <p>
-                <button onClick={() => this.onPrevClick()}>Previous</button>
-                <button onClick={() => this.onPlayClick()}>{playing ? "Pause" : "Play"}</button>
-                <button onClick={() => this.onNextClick()}>Next</button>
+                <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
+                <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
+                <i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i>
               </p>
             </div>)
           :
