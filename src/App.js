@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import VolumeSlider from './components/VolumeSlider';
+
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class App extends Component {
       trackName: "Track Name",
       artistName: "Artist Name",
       albumName: "Album Name",
+      albumImage: "",
       playing: false,
       position: 0,
       duration: 0,
@@ -38,7 +41,7 @@ class App extends Component {
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({
-        name: "Chris's Spotify Player",
+        name: "Spotify Web Player",
         getOAuthToken: cb => { cb(token); },
         volume: 0.5
       });
@@ -70,19 +73,12 @@ class App extends Component {
       this.transferPlaybackHere();
     });
 
+    //if state of local playback has changed
     this.player.addListener('player_state_changed', state => this.onStateChanged(state));
-
-    /*
-    // Not Ready
-    player.addListener('not_ready', ({ device_id }) => {
-      console.log('Device ID has gone offline', device_id);
-    });
-
-    // Connect to the player!
-    player.connect();*/
   }
 
   onStateChanged(state) {
+    //if no longer listening to music, we get a null
     if (state !== null) {
       const {
         current_track: currentTrack,
@@ -91,7 +87,8 @@ class App extends Component {
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
-      const artistName = currentTrack.artists
+      const albumImage = currentTrack.album.images.map(image => image.url).slice(0,1);  //get first element of array
+      const artistName = currentTrack.artists //get all artists and join with ', '
         .map(artist => artist.name)
         .join(", ");
       const playing = !state.paused;
@@ -101,6 +98,7 @@ class App extends Component {
         trackName,
         albumName,
         artistName,
+        albumImage,
         playing
       });
     }
@@ -141,6 +139,7 @@ class App extends Component {
       artistName,
       trackName,
       albumName,
+      albumImage,
       error,
       position,
       duration,
@@ -148,11 +147,9 @@ class App extends Component {
      } = this.state;
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Now Playing</h2>
-          <p>Spotify Web Player</p>
-        </div>
+      <div className="main">
+        <h2>Now Playing</h2>
+        <p>Spotify Web Player</p>
 
         {error && <p>Error: {error}</p>}
 
@@ -161,17 +158,19 @@ class App extends Component {
               <p>Artist: {artistName}</p>
               <p>Track: {trackName}</p>
               <p>Album: {albumName}</p>
+              <p><img src={albumImage}></img></p>
               <p>
                 <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
                 <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
                 <i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i>
               </p>
+              <VolumeSlider />
             </div>)
           :
           (<div>
             <p className="App-intro">
               Enter your Spotify access token. Get it from{" "}
-              <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/">
+              <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
               here
               </a>.
             </p>
