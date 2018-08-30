@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import VolumeSlider from './components/VolumeSlider';
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 
 
 class App extends Component {
@@ -19,6 +21,7 @@ class App extends Component {
       playing: false,
       position: 0,
       duration: 0,
+      volume: 0.5
     };
 
     this.playerCheckInterval = null;
@@ -132,6 +135,16 @@ class App extends Component {
     });
   }
 
+  //change volume
+  changeVolume = (value) => {
+    this.player.setVolume(value).then(() => {
+      console.log('Volume updated to ' + value);
+    });
+    this.setState({
+      volume: value
+    })
+  }
+
   render() {
     const { 
       token,
@@ -144,6 +157,7 @@ class App extends Component {
       position,
       duration,
       playing,
+      volume
      } = this.state;
 
     return (
@@ -163,8 +177,17 @@ class App extends Component {
                 <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
                 <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
                 <i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i>
+                <button onClick={() => this.changeVolume()}> low </button>
+                <button onClick={() => this.changeVolumeAgain()}> high </button>
               </p>
-              <VolumeSlider />
+              <Slider
+                min={0.01}
+                max={0.99}
+                step={0.01}
+                value={volume}
+                tooltip={false}
+                onChange={this.changeVolume}
+              />
             </div>)
           :
           (<div>

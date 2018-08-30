@@ -6,7 +6,7 @@ class VolumeSlider extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      volume: 0
+      volume: 0.5
     }
   }
  
@@ -20,8 +20,11 @@ class VolumeSlider extends Component {
     let { volume } = this.state
     return (
       <Slider
+        min={0.01}
+        max={0.99}
+        step={0.01}
         value={volume}
-        orientation="horizontal"
+        tooltip={true}
         onChange={this.handleOnChange}
       />
     );
