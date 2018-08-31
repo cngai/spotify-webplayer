@@ -24,7 +24,8 @@ class App extends Component {
       duration: 0,
       durationMin: 0,
       durationSec: 0,
-      volume: 0.5
+      volume: 0.5,
+      failedLogin: false
     };
 
     this.playerCheckInterval = null;
@@ -33,8 +34,6 @@ class App extends Component {
 
   handleLogin() {
     if (this.state.token !== "") {
-      this.setState({ loggedIn: true });
-
       //check every second for the player
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
@@ -67,7 +66,10 @@ class App extends Component {
     this.player.addListener('initialization_error', e => { console.error(e); });
     this.player.addListener('authentication_error', e => {
       console.error(e);
-      this.setState({ loggedIn: false});
+      this.setState({
+        loggedIn: false,
+        failedLogin: true
+      });
     });
     this.player.addListener('account_error', e => { console.error(e); });
     this.player.addListener('playback_error', e => { console.error(e); });
@@ -79,7 +81,10 @@ class App extends Component {
     this.player.addListener('ready', data => {
       let { device_id } = data;
       console.log('Ready with Device ID');
-      this.setState({ deviceID: device_id });
+      this.setState({
+        deviceID: device_id,
+        loggedIn: true
+      });
       this.transferPlaybackHere();
     });
 
@@ -208,7 +213,8 @@ class App extends Component {
       durationMin,
       durationSec,
       playing,
-      volume
+      volume,
+      failedLogin
      } = this.state;
 
     return (
@@ -260,6 +266,12 @@ class App extends Component {
               <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
               <button onClick={() => this.handleLogin()}>Go</button>
             </p>
+            {failedLogin ? (
+                <div>
+                <p>You have entered an invalid or expired access token. Please try again.</p>
+                </div>)
+              : (<div></div>)
+            }
           </div>)
         }
       </div>
