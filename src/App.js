@@ -19,12 +19,15 @@ class App extends Component {
       albumImage: "",
       playing: false,
       position: 0,
+      positionMin: 0,
+      positionSec: 0,
       duration: 0,
+      durationMS: 0,
       volume: 0.5
     };
 
     this.playerCheckInterval = null;
-    this.playerUpdateTime = null;
+    this.playerUpdatePosition = null;
   }
 
   handleLogin() {
@@ -84,7 +87,10 @@ class App extends Component {
   }
 
   onStateChanged(state) {
-    this.playerUpdateTime = setInterval(() => this.checkForPosition(),1000);
+    var millisec = require('millisec');
+
+    //check for position every second
+    this.playerUpdatePosition = setInterval(() => this.checkForPosition(),1000);
 
     //if no longer listening to music, we get a null
     if (state !== null) {
@@ -93,6 +99,7 @@ class App extends Component {
       } = state.track_window;
       const position = state.position;
       const duration = state.duration;
+      const durationMS = millisec(duration).format('mm : ss');
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const albumImage = currentTrack.album.images.map(image => image.url).slice(0,1);  //get first element of array
@@ -115,11 +122,19 @@ class App extends Component {
     }
   }
 
+  //update position of song
   checkForPosition() {
+    var millisec = require('millisec');
+
     this.player.getCurrentState().then(state => {
       const position = state.position;
+      const positionMin = millisec(position).format('mm');
+      const oldPositionSec = millisec(position).format('ss');
+      const positionSec = ("0" + oldPositionSec).slice(-2);   //used to prepend 0 to single digit seconds
       this.setState({
-        position
+        position,
+        positionMin,
+        positionSec
       });
     });
   }
@@ -182,7 +197,10 @@ class App extends Component {
       albumImage,
       error,
       position,
+      positionMin,
+      positionSec,
       duration,
+      durationMS,
       playing,
       volume
      } = this.state;
@@ -200,7 +218,8 @@ class App extends Component {
               <p>Track: {trackName}</p>
               <p>Album: {albumName}</p>
               <p><img src={albumImage}></img></p>
-              <p>Duration: {volume}</p>
+              <p>Position: {positionMin}:{positionSec}</p>
+              <p>Duration: {durationMS}</p>
               <p>
                 <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
                 <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
