@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import VolumeSlider from './components/VolumeSlider';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
@@ -25,6 +24,7 @@ class App extends Component {
     };
 
     this.playerCheckInterval = null;
+    this.playerUpdateTime = null;
   }
 
   handleLogin() {
@@ -43,14 +43,17 @@ class App extends Component {
       //cancel the interval if player created
       clearInterval(this.playerCheckInterval);
 
+      //initialize the Web Playback SDK
       this.player = new window.Spotify.Player({
         name: "Spotify Web Player",
         getOAuthToken: cb => { cb(token); },
         volume: 0.5
       });
 
+      //create event handlers
       this.createEventHandlers();
 
+      //connect web playback SDK to Spotify
       this.player.connect();
     }
   }
@@ -81,13 +84,15 @@ class App extends Component {
   }
 
   onStateChanged(state) {
+    this.playerUpdateTime = setInterval(() => this.checkForPosition(),1000);
+
     //if no longer listening to music, we get a null
     if (state !== null) {
       const {
         current_track: currentTrack,
-        position,
-        duration,
       } = state.track_window;
+      const position = state.position;
+      const duration = state.duration;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const albumImage = currentTrack.album.images.map(image => image.url).slice(0,1);  //get first element of array
@@ -104,7 +109,19 @@ class App extends Component {
         albumImage,
         playing
       });
+      console.log('Currently Playing', currentTrack);
+      console.log('Position in Song', position);
+      console.log('Duration of Song', duration);
     }
+  }
+
+  checkForPosition() {
+    this.player.getCurrentState().then(state => {
+      const position = state.position;
+      this.setState({
+        position
+      });
+    });
   }
 
   onPrevClick() {
@@ -145,6 +162,16 @@ class App extends Component {
     })
   }
 
+  changePosition = (value) => {
+    this.player.seek(value).then(() => {
+      console.log('Changed position!');
+    });
+    this.setState({
+      position: value
+    })
+  }
+
+
   render() {
     const { 
       token,
@@ -173,12 +200,11 @@ class App extends Component {
               <p>Track: {trackName}</p>
               <p>Album: {albumName}</p>
               <p><img src={albumImage}></img></p>
+              <p>Duration: {volume}</p>
               <p>
                 <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
                 <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
                 <i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i>
-                <button onClick={() => this.changeVolume()}> low </button>
-                <button onClick={() => this.changeVolumeAgain()}> high </button>
               </p>
               <Slider
                 min={0.01}
@@ -187,6 +213,14 @@ class App extends Component {
                 value={volume}
                 tooltip={false}
                 onChange={this.changeVolume}
+              />
+              <Slider
+                min={0}
+                max={duration}
+                step={1}
+                value={position}
+                tooltip={false}
+                onChange={this.changePosition}
               />
             </div>)
           :
