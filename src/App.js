@@ -22,7 +22,8 @@ class App extends Component {
       positionMin: 0,
       positionSec: 0,
       duration: 0,
-      durationMS: 0,
+      durationMin: 0,
+      durationSec: 0,
       volume: 0.5
     };
 
@@ -99,7 +100,9 @@ class App extends Component {
       } = state.track_window;
       const position = state.position;
       const duration = state.duration;
-      const durationMS = millisec(duration).format('mm : ss');
+      const durationMin = millisec(duration).format('mm');
+      const oldDurationSec = millisec(duration).format('ss');
+      const durationSec = ("0" + oldDurationSec).slice(-2);   //used to prepend 0 to single digit seconds
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const albumImage = currentTrack.album.images.map(image => image.url).slice(0,1);  //get first element of array
@@ -110,6 +113,8 @@ class App extends Component {
       this.setState({
         position,
         duration,
+        durationMin,
+        durationSec,
         trackName,
         albumName,
         artistName,
@@ -200,7 +205,8 @@ class App extends Component {
       positionMin,
       positionSec,
       duration,
-      durationMS,
+      durationMin,
+      durationSec,
       playing,
       volume
      } = this.state;
@@ -219,7 +225,7 @@ class App extends Component {
               <p>Album: {albumName}</p>
               <p><img src={albumImage}></img></p>
               <p>Position: {positionMin}:{positionSec}</p>
-              <p>Duration: {durationMS}</p>
+              <p>Duration: {durationMin}:{durationSec}</p>
               <p>
                 <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
                 <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
