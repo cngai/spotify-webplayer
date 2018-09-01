@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
+import cassette from './img/cassette.png';
 
 
 class App extends Component {
@@ -219,9 +220,6 @@ class App extends Component {
 
     return (
       <div className="main">
-        <h2>Now Playing</h2>
-        <p>Spotify Web Player</p>
-
         {error && <p>Error: {error}</p>}
 
         {loggedIn ?
@@ -256,6 +254,7 @@ class App extends Component {
             </div>)
           :
           (<div>
+            <img src={cassette} className="cassette" />
             <p className="App-intro">
               Enter your Spotify access token. Get it from{" "}
               <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
