@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
-import cassette from './img/cassette.png';
+import cassette from './img/cassette-blue.png';
 
 
 class App extends Component {
