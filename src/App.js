@@ -254,17 +254,25 @@ class App extends Component {
             </div>)
           :
           (<div>
-            <img src={cassette} className="cassette" />
-            <p className="App-intro">
-              Enter your Spotify access token. Get it from{" "}
-              <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
-              here
-              </a>.
-            </p>
-            <p>
-              <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
-              <button onClick={() => this.handleLogin()}>Go</button>
-            </p>
+            <div className="row">
+              <div className="col-6 cassette-col">
+                <img src={cassette} className="cassette" />
+              </div>
+              <div className="col-6 login-col">
+                <div className="login-info">
+                  <p className="login-text">
+                    Enter your Spotify access token. Get it from{" "}
+                    <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
+                    here
+                    </a>.
+                  </p>
+                  <p>
+                    <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
+                    <button onClick={() => this.handleLogin()}>Go</button>
+                  </p>
+                </div>
+              </div>
+            </div>
             {failedLogin ? (
                 <div>
                 <p>You have entered an invalid or expired access token. Please try again.</p>

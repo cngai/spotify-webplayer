@@ -15,7 +15,12 @@
   height: 80px;
 }
 
-.App-intro {
+.login-info {
+  border: 5px solid red;
+  float: left;
+}
+
+.login-text {
   font-size: large;
   font-family: 'permanent_markerregular', Arial, sans-serif;
   font-weight: normal;
@@ -25,11 +30,23 @@
 
 .cassette {
   height: 300px;
+  transform: rotate(-15deg);
+  float: right;
+}
+
+.cassette-col {
+  border: 5px solid red;
+}
+
+.login-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
 }
 
 .slidecontainer {
-    margin: auto;
-    width: 30%;
+  margin: auto;
+  width: 30%;
 }
 
 /* The slider itself */
@@ -66,3 +83,69 @@
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
+
+
+/* xs devices */
+@media (max-width:576px){
+  .cassette {
+    height: 100px;
+  }
+}
+
+/* small devices */
+@media (min-width: 577px) and (max-width:768px){
+  .cassette {
+    height: 200px;
+  }
+}
+
+/* medium devices */
+@media (min-width: 769px) and (max-width:992px){
+  .cassette {
+    height: 350px;
+  }
+}
+
+/* large devices */
+@media (min-width: 993px) and (max-width: 1200px){
+  .cassette {
+    height: 450px;
+  }
+}
+
+/* xl devices */
+@media (min-width: 1201px){
+  .cassette {
+    height: 550px;
+  }
+}
+
+
+/*
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .cassette {
+    height: 200px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .cassette {
+    height: 300px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .cassette {
+    height: 400px;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cassette {
+    height: 500px;
+  }
+}*/
