@@ -261,7 +261,7 @@ class App extends Component {
               <div className="col-6 login-col">
                 <div className="login-info">
                   <p className="login-text">
-                    Enter your Spotify access token. Get it from{" "}
+                    Enter your Spotify access token.<br />Get it from{" "}
                     <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
                     here
                     </a>.
@@ -271,14 +271,14 @@ class App extends Component {
                     <button onClick={() => this.handleLogin()}>Go</button>
                   </p>
                 </div>
+                {failedLogin ? (
+                  <div className="expired">
+                    <p className="login-text">You have entered an invalid<br />or expired access token.<br />Please try again.</p>
+                    </div>)
+                  : (<div></div>)
+                }
               </div>
             </div>
-            {failedLogin ? (
-                <div>
-                <p>You have entered an invalid or expired access token. Please try again.</p>
-                </div>)
-              : (<div></div>)
-            }
           </div>)
         }
       </div>

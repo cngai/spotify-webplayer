@@ -32,16 +32,27 @@
   height: 300px;
   transform: rotate(-15deg);
   float: right;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .cassette-col {
   border: 5px solid red;
+  text-align: center;
+  margin: auto;
 }
 
 .login-col {
   border: 5px solid red;
   text-align: center;
   margin: auto;
+  padding-left: 0;
+}
+
+.expired {
+  position: absolute;
+  top: 100px;
+  left: 20px;
 }
 
 .slidecontainer {
@@ -88,64 +99,34 @@
 /* xs devices */
 @media (max-width:576px){
   .cassette {
-    height: 100px;
+    height: 120px;
   }
 }
 
 /* small devices */
 @media (min-width: 577px) and (max-width:768px){
   .cassette {
-    height: 200px;
+    height: 175px;
   }
 }
 
 /* medium devices */
 @media (min-width: 769px) and (max-width:992px){
   .cassette {
-    height: 350px;
+    height: 250px;
   }
 }
 
 /* large devices */
 @media (min-width: 993px) and (max-width: 1200px){
   .cassette {
-    height: 450px;
+    height: 350px;
   }
 }
 
 /* xl devices */
 @media (min-width: 1201px){
   .cassette {
-    height: 550px;
+    height: 450px;
   }
 }
-
-
-/*
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .cassette {
-    height: 200px;
-  }
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .cassette {
-    height: 300px;
-  }
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .cassette {
-    height: 400px;
-  }
-}
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-  .cassette {
-    height: 500px;
-  }
-}*/
