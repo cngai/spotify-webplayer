@@ -16,7 +16,7 @@
 }
 
 .login-info {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   float: left;
 }
 
@@ -32,21 +32,25 @@
   height: 300px;
   transform: rotate(-15deg);
   float: right;
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 
 .cassette-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
 }
 
 .login-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
   padding-left: 0;
+}
+
+.ipod {
+  height: 600px;
 }
 
 .slidecontainer {
@@ -137,7 +141,7 @@
 /* xl devices */
 @media (min-width: 1201px){
   .cassette {
-    height: 450px;
+    height: 400px;
   }
   .login-text {
     font-size: 28px;

@@ -4,6 +4,7 @@ import './App.css';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 import cassette from './img/cassette-blue.png';
+import ipod from './img/ipod.png';
 
 
 class App extends Component {
@@ -224,6 +225,10 @@ class App extends Component {
 
         {loggedIn ?
           (<div>
+            <div className="row">
+              <img src={ipod} className="ipod" />
+            </div>
+            <div className="row">
               <p>Artist: {artistName}</p>
               <p>Track: {trackName}</p>
               <p>Album: {albumName}</p>
@@ -251,7 +256,8 @@ class App extends Component {
                 tooltip={false}
                 onChange={this.changePosition}
               />
-            </div>)
+            </div>
+          </div>)
           :
           (<div>
             <div className="row">
