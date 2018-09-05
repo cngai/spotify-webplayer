@@ -255,11 +255,11 @@ class App extends Component {
           :
           (<div>
             <div className="row">
-              <div className="col-6 cassette-col">
+              <div className="col-sm-6 cassette-col">
                 <img src={cassette} className="cassette" />
               </div>
-              <div className="col-6 login-col">
-                <div className="login-info">
+              <div className="col-sm-6 login-col">
+                <div className="col-sm-10 login-info">
                   <p className="login-text">
                     Enter your Spotify access token.<br />Get it from{" "}
                     <a href="https://developer.spotify.com/documentation/web-playback-sdk/quick-start/" target="_blank">
@@ -267,16 +267,20 @@ class App extends Component {
                     </a>.
                   </p>
                   <p>
-                    <input type="text" value={token} onChange={e => this.setState({ token: e.target.value })} />
-                    <button onClick={() => this.handleLogin()}>Go</button>
+                    <div className="input-group">
+                      <input type="text" class ="form-control" value={token} onChange={e => this.setState({ token: e.target.value })} />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" onClick={() => this.handleLogin()}>Go</button>
+                      </span>
+                    </div>
                   </p>
+                  {failedLogin ? (
+                    <div className="expired">
+                      <p className="login-text">You have entered an invalid<br />or expired access token.<br />Please try again.</p>
+                      </div>)
+                    : (<div></div>)
+                  }
                 </div>
-                {failedLogin ? (
-                  <div className="expired">
-                    <p className="login-text">You have entered an invalid<br />or expired access token.<br />Please try again.</p>
-                    </div>)
-                  : (<div></div>)
-                }
               </div>
             </div>
           </div>)

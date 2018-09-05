@@ -49,12 +49,6 @@
   padding-left: 0;
 }
 
-.expired {
-  position: absolute;
-  top: 100px;
-  left: 20px;
-}
-
 .slidecontainer {
   margin: auto;
   width: 30%;
@@ -98,8 +92,15 @@
 
 /* xs devices */
 @media (max-width:576px){
+  .login-info {
+    float: none;
+  }
   .cassette {
-    height: 120px;
+    height: 200px;
+    float: none;
+  }
+  .login-col {
+    padding-left: 15px;
   }
 }
 
@@ -108,6 +109,9 @@
   .cassette {
     height: 175px;
   }
+  .login-text {
+    font-size: 16px;
+  }
 }
 
 /* medium devices */
@@ -115,12 +119,18 @@
   .cassette {
     height: 250px;
   }
+  .login-text {
+    font-size: 18px;
+  }
 }
 
 /* large devices */
 @media (min-width: 993px) and (max-width: 1200px){
   .cassette {
-    height: 350px;
+    height: 320px;
+  }
+  .login-text {
+    font-size: 22px;
   }
 }
 
@@ -128,5 +138,8 @@
 @media (min-width: 1201px){
   .cassette {
     height: 450px;
+  }
+  .login-text {
+    font-size: 28px;
   }
 }
