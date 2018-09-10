@@ -226,36 +226,58 @@ class App extends Component {
         {loggedIn ?
           (<div>
             <div className="row">
-              <img src={ipod} className="ipod" />
+              <div className="col-sm-6 album-col">
+                <img className="album" src={albumImage} />
+              </div>
+              <div className="col-sm-6 song-col">
+                <div className="row">
+                  <div className="col-8 artist-col">
+                    <p className="song-text"><i class="material-icons song-icon">music_note</i> {trackName}</p>
+                    <p className="song-text"><span class="glyphicon glyphicon-user song-icon" /> {artistName}</p>
+                    <p className="song-text"><i class="material-icons song-icon">album</i> {albumName}</p>
+                  </div>
+                  <div className="col-4 volume-col">
+                    <p className="volume-text"><i class="material-icons">volume_up</i></p>
+                    <Slider
+                      min={0.01}
+                      max={0.99}
+                      step={0.01}
+                      value={volume}
+                      tooltip={false}
+                      onChange={this.changeVolume}
+                      orientation="vertical"
+                    />
+                    <p className="volume-text"><i class="material-icons">volume_down</i></p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="row">
-              <p>Artist: {artistName}</p>
-              <p>Track: {trackName}</p>
-              <p>Album: {albumName}</p>
-              <p><img src={albumImage}></img></p>
-              <p>Position: {positionMin}:{positionSec}</p>
-              <p>Duration: {durationMin}:{durationSec}</p>
-              <p>
-                <i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i>
-                <i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i>
-                <i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i>
-              </p>
-              <Slider
-                min={0.01}
-                max={0.99}
-                step={0.01}
-                value={volume}
-                tooltip={false}
-                onChange={this.changeVolume}
-              />
-              <Slider
-                min={0}
-                max={duration}
-                step={1}
-                value={position}
-                tooltip={false}
-                onChange={this.changePosition}
-              />
+            <div className="slider-col">
+              <div className="row">
+                <div className="col-1">
+                  <p className="position-text">{positionMin}:{positionSec} </p>
+                </div>
+                <div className="col-10">
+                  <Slider
+                    min={0}
+                    max={duration}
+                    step={1}
+                    value={position}
+                    tooltip={false}
+                    onChange={this.changePosition}
+                  />
+                </div>
+                <div className="col-1">
+                  <p className="position-text"> {durationMin}:{durationSec}</p>
+                </div>
+              </div>
+              <div className="row">
+                <p className="button-text">
+                  <p className="button-hov"><i onClick={() => this.onPrevClick()}> <i className="fa fa-step-backward"></i> </i></p>
+                  <p className="button-hov"><i onClick={() => this.onPlayClick()}>{playing ? <i className="fa fa-pause-circle-o"></i> : <i className="fa fa-play-circle-o"></i>}</i></p>
+                  <p className="button-hov"><i onClick={() => this.onNextClick()}> <i className="fa fa-step-forward"> </i></i></p>
+                </p>
+              </div>
             </div>
           </div>)
           :

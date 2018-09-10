@@ -49,8 +49,85 @@
   padding-left: 0;
 }
 
-.ipod {
-  height: 600px;
+.album-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
+}
+
+.song-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
+}
+
+.slider-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
+}
+
+.artist-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
+}
+
+.volume-col {
+  border: 5px solid red;
+  text-align: center;
+  margin: auto;
+  float: left;
+}
+
+.album {
+  border-radius: 50%;
+}
+
+.song-icon {
+  font-size: 16px;
+}
+
+.song-text {
+  font-size: large;
+  font-family: 'permanent_markerregular', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #464a63;
+}
+
+.volume-text {
+  font-size: large;
+  font-family: 'permanent_markerregular', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #464a63;
+}
+
+.position-text {
+  font-size: large;
+  font-family: 'permanent_markerregular', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #464a63;
+}
+
+.button-text {
+  font-size: large;
+  font-family: 'permanent_markerregular', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #464a63;
+  text-align: center;
+  margin: auto; 
+}
+
+.button-hov {
+  display: inline-block;
+}
+
+.button-hov:hover {
+  transform: scale(1.5);
 }
 
 .slidecontainer {
