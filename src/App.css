@@ -50,7 +50,7 @@
 }
 
 .album-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
 }
@@ -62,9 +62,10 @@
 }
 
 .slider-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
+  padding: 30px;
 }
 
 .artist-col {
@@ -74,18 +75,24 @@
 }
 
 .volume-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
-  float: left;
 }
 
 .album {
   border-radius: 50%;
+  margin: 40px;
+  float: right;
 }
 
 .song-icon {
   font-size: 16px;
+}
+
+.middle {
+  display: flex;
+  align-items: center;
 }
 
 .song-text {
@@ -96,12 +103,24 @@
   color: #464a63;
 }
 
+.song-info {
+  border: 5px solid red;
+  float: left;
+  text-align: center;
+  margin: auto;
+}
+
 .volume-text {
   font-size: large;
   font-family: 'permanent_markerregular', Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: #464a63;
+  margin-top: 10px;
+}
+
+.volume-up {
+  margin-bottom: 10px;
 }
 
 .position-text {
@@ -110,10 +129,12 @@
   font-weight: normal;
   font-style: normal;
   color: #464a63;
+  position: absolute;
+  top: 12px;
 }
 
 .button-text {
-  font-size: large;
+  font-size: 30px;
   font-family: 'permanent_markerregular', Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
@@ -124,10 +145,11 @@
 
 .button-hov {
   display: inline-block;
+  margin: 5px;
 }
 
 .button-hov:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
 .slidecontainer {
