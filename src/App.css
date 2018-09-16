@@ -153,6 +153,11 @@
   transform: scale(1.2);
 }
 
+.btn-primary {
+  background-color: #464a63 !important;
+  border-color: #464a63 !important;
+}
+
 .slidecontainer {
   margin: auto;
   width: 30%;
@@ -226,6 +231,7 @@
 @media (min-width: 577px) and (max-width:768px){
   .cassette {
     height: 175px;
+    margin-top: 105px;
   }
   .login-text {
     font-size: 16px;
@@ -248,6 +254,7 @@
 @media (min-width: 769px) and (max-width:992px){
   .cassette {
     height: 250px;
+    margin-top: 75px;
   }
   .login-text {
     font-size: 18px;
@@ -271,6 +278,7 @@
 @media (min-width: 993px) and (max-width: 1200px){
   .cassette {
     height: 320px;
+    margin-top: 100px;
   }
   .login-text {
     font-size: 22px;
@@ -298,12 +306,13 @@
 @media (min-width: 1201px){
   .cassette {
     height: 400px;
+    margin-top: 140px;
   }
   .login-text {
     font-size: 28px;
   }
   .album {
-    height: 470px;
+    height: 400px;
   }
   .song-text {
     font-size: 30px;
