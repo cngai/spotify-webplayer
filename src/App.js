@@ -231,31 +231,33 @@ class App extends Component {
               </div>
               <div className="col-sm-6 song-col">
                 <div className="row">
-                  <div className="col-8 artist-col">
+                  <div className="col-sm-8 artist-col">
                     <div className="row middle">
-                      <div className="col-9">
+                      <div className="col-sm-9">
                         <div className="song-info">
                           <p className="song-text"><i class="material-icons song-icon">music_note</i> {trackName}</p>
                           <p className="song-text"><span class="glyphicon glyphicon-user song-icon" /> {artistName}</p>
                           <p className="song-text"><i class="material-icons song-icon">album</i> {albumName}</p>
                         </div>
                       </div>
-                      <div className="col-3 volume-bar">
-                        <p className="volume-text"><i class="material-icons">volume_up</i></p>
-                        <Slider
-                          min={0.01}
-                          max={0.99}
-                          step={0.01}
-                          value={volume}
-                          tooltip={false}
-                          onChange={this.changeVolume}
-                          orientation="vertical"
-                        />
-                        <p className="volume-text"><i class="material-icons">volume_down</i></p>
+                      <div className="col-sm-3">
+                        <div className="volume-bar">
+                          <p className="volume-text"><i class="material-icons">volume_up</i></p>
+                          <Slider
+                            min={0.01}
+                            max={0.99}
+                            step={0.01}
+                            value={volume}
+                            tooltip={false}
+                            onChange={this.changeVolume}
+                            orientation="vertical"
+                          />
+                          <p className="volume-text"><i class="material-icons">volume_down</i></p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 volume-col">
+                  <div className="col-sm-4 volume-col">
                   </div>
                 </div>
               </div>

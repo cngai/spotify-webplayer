@@ -56,7 +56,7 @@
 }
 
 .song-col {
-  border: 5px solid red;
+  /*border: 5px solid red; */
   text-align: center;
   margin: auto;
 }
@@ -69,7 +69,7 @@
 }
 
 .artist-col {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   text-align: center;
   margin: auto;
 }
@@ -104,7 +104,7 @@
 }
 
 .song-info {
-  border: 5px solid red;
+  /*border: 5px solid red;*/
   float: left;
   text-align: center;
   margin: auto;
@@ -205,6 +205,13 @@
   .login-col {
     padding-left: 15px;
   }
+  .album {
+    float: none;
+    height: 260px;
+  }
+  .song-info {
+    float: none;
+  }
 }
 
 /* small devices */
@@ -214,6 +221,9 @@
   }
   .login-text {
     font-size: 16px;
+  }
+  .album {
+    height: 200px;
   }
 }
 
@@ -235,6 +245,9 @@
   .login-text {
     font-size: 22px;
   }
+  .album {
+    height: 350px;
+  }
 }
 
 /* xl devices */
@@ -244,5 +257,8 @@
   }
   .login-text {
     font-size: 28px;
+  }
+  .album {
+    height: 470px;
   }
 }
