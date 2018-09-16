@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
+import MediaQuery from 'react-responsive';
 import cassette from './img/cassette-blue.png';
 import ipod from './img/ipod.png';
 
@@ -243,15 +244,28 @@ class App extends Component {
                       <div className="col-sm-3">
                         <div className="volume-bar">
                           <p className="volume-text"><i class="material-icons">volume_up</i></p>
-                          <Slider
-                            min={0.01}
-                            max={0.99}
-                            step={0.01}
-                            value={volume}
-                            tooltip={false}
-                            onChange={this.changeVolume}
-                            orientation="vertical"
-                          />
+                          <MediaQuery query="(max-width: 576px)">
+                            <Slider
+                              min={0.01}
+                              max={0.99}
+                              step={0.01}
+                              value={volume}
+                              tooltip={false}
+                              onChange={this.changeVolume}
+                              orientation="horizontal"
+                            />
+                          </MediaQuery>
+                          <MediaQuery query="(min-width: 577px)">
+                            <Slider
+                              min={0.01}
+                              max={0.99}
+                              step={0.01}
+                              value={volume}
+                              tooltip={false}
+                              onChange={this.changeVolume}
+                              orientation="vertical"
+                            />
+                          </MediaQuery>
                           <p className="volume-text"><i class="material-icons">volume_down</i></p>
                         </div>
                       </div>
