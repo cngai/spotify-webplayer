@@ -241,33 +241,42 @@ class App extends Component {
                           <p className="song-text"><i class="material-icons song-icon">album</i> {albumName}</p>
                         </div>
                       </div>
-                      <div className="col-sm-3">
-                        <div className="volume-bar">
+                      <div className="col-sm-3 volume-bar">
+                        <MediaQuery query="(max-width: 576px)">
+                          <div className="row">
+                            <div className="col-1">
+                              <p className="volume-text"><i class="material-icons">volume_up</i></p>
+                            </div>
+                            <div className="col-10">
+                              <Slider
+                                min={0.01}
+                                max={0.99}
+                                step={0.01}
+                                value={volume}
+                                tooltip={false}
+                                onChange={this.changeVolume}
+                                orientation="horizontal"
+                              />
+                            </div>
+                            <div className="col-1">
+                              <p className="volume-text"><i class="material-icons">volume_down</i></p>
+                            </div>
+                          </div>
+                        </MediaQuery>
+                        <MediaQuery query="(min-width: 577px)">
                           <p className="volume-text"><i class="material-icons">volume_up</i></p>
-                          <MediaQuery query="(max-width: 576px)">
-                            <Slider
-                              min={0.01}
-                              max={0.99}
-                              step={0.01}
-                              value={volume}
-                              tooltip={false}
-                              onChange={this.changeVolume}
-                              orientation="horizontal"
-                            />
-                          </MediaQuery>
-                          <MediaQuery query="(min-width: 577px)">
-                            <Slider
-                              min={0.01}
-                              max={0.99}
-                              step={0.01}
-                              value={volume}
-                              tooltip={false}
-                              onChange={this.changeVolume}
-                              orientation="vertical"
-                            />
-                          </MediaQuery>
+                          <Slider
+                            min={0.01}
+                            max={0.99}
+                            step={0.01}
+                            value={volume}
+                            tooltip={false}
+                            onChange={this.changeVolume}
+                            orientation="vertical"
+                          />
                           <p className="volume-text"><i class="material-icons">volume_down</i></p>
-                        </div>
+                        </MediaQuery>
+                        
                       </div>
                     </div>
                   </div>
